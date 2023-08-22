@@ -1108,7 +1108,7 @@
   "resolved" "https://registry.npmjs.org/de-indent/-/de-indent-1.0.2.tgz"
   "version" "1.0.2"
 
-"debug@^4.1.0", "debug@^4.1.1", "debug@^4.3.1", "debug@^4.3.4", "debug@4":
+"debug@^4.1.0", "debug@^4.1.1", "debug@^4.3.1", "debug@^4.3.2", "debug@^4.3.4", "debug@4":
   "integrity" "sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ=="
   "resolved" "https://registry.npmmirror.com/debug/-/debug-4.3.4.tgz"
   "version" "4.3.4"
@@ -1412,7 +1412,7 @@
   "resolved" "https://registry.npmmirror.com/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz"
   "version" "3.1.3"
 
-"fast-glob@^3.2.12", "fast-glob@^3.3.0", "fast-glob@^3.3.1":
+"fast-glob@^3.2.12", "fast-glob@^3.2.7", "fast-glob@^3.3.0", "fast-glob@^3.3.1":
   "integrity" "sha512-kNFPyjhh5cKjrUltxs+wFx+ZkbRaxxmZ+X0ZU31SOsxCEtP9VPgtq2teZw1DebupL5GmDaNQ6yKMMVcM41iqDg=="
   "resolved" "https://registry.npmjs.org/fast-glob/-/fast-glob-3.3.1.tgz"
   "version" "3.3.1"
@@ -1931,6 +1931,13 @@
   "version" "6.0.0"
   dependencies:
     "yallist" "^4.0.0"
+
+"magic-string@^0.25.7":
+  "integrity" "sha512-RmF0AsMzgt25qzqqLc1+MbHmhdx0ojF2Fvs4XnOqz2ZOBXzzkEwc/dJQZCYHAn7v1jbVOjAZfK8msRn4BxO4VQ=="
+  "resolved" "https://registry.npmjs.org/magic-string/-/magic-string-0.25.9.tgz"
+  "version" "0.25.9"
+  dependencies:
+    "sourcemap-codec" "^1.4.8"
 
 "magic-string@^0.30.0", "magic-string@^0.30.1", "magic-string@^0.30.2":
   "integrity" "sha512-lNZdu7pewtq/ZvWUp9Wpf/x7WzMTsR26TWV03BRZrXFsv+BI6dy8RAiKgm1uM/kyR0rCfUcqvOlXKG66KhIGug=="
@@ -2523,6 +2530,11 @@
   "resolved" "https://registry.npmmirror.com/source-map/-/source-map-0.6.1.tgz"
   "version" "0.6.1"
 
+"sourcemap-codec@^1.4.8":
+  "integrity" "sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA=="
+  "resolved" "https://registry.npmjs.org/sourcemap-codec/-/sourcemap-codec-1.4.8.tgz"
+  "version" "1.4.8"
+
 "spawn-command@0.0.2":
   "integrity" "sha512-zC8zGoGkmc8J9ndvml8Xksr1Amk9qBujgbF0JAIWO7kXr43w0h/0GJNM/Vustixu+YE8N/MTrQ7N31FvHUACxQ=="
   "resolved" "https://mirrors.huaweicloud.com/repository/npm/spawn-command/-/spawn-command-0.0.2.tgz"
@@ -2808,6 +2820,16 @@
     "core-util-is" "1.0.2"
     "extsprintf" "^1.2.0"
 
+"vite-plugin-components@^0.13.3":
+  "integrity" "sha512-6vLWPrEqFSW7REYvux/WVwxsytg/DcstVhdgAT806cZi/KGiQgB8dyFnLkrkFawxUQruuGkLWfS99Z/64mMC0w=="
+  "resolved" "https://registry.npmjs.org/vite-plugin-components/-/vite-plugin-components-0.13.3.tgz"
+  "version" "0.13.3"
+  dependencies:
+    "debug" "^4.3.2"
+    "fast-glob" "^3.2.7"
+    "magic-string" "^0.25.7"
+    "minimatch" "^3.0.4"
+
 "vite-plugin-electron-renderer@^0.14.5":
   "integrity" "sha512-EQ7ORuPp8vFPCqfuGnVo7d36fXS0IFH4/RUlKb1drseix3TQEPcgwEuFADdXBxRgqMp70njz/1m0kdf5lEsm8w=="
   "resolved" "https://mirrors.huaweicloud.com/repository/npm/vite-plugin-electron-renderer/-/vite-plugin-electron-renderer-0.14.5.tgz"
@@ -2818,7 +2840,7 @@
   "resolved" "https://mirrors.huaweicloud.com/repository/npm/vite-plugin-electron/-/vite-plugin-electron-0.12.0.tgz"
   "version" "0.12.0"
 
-"vite@^4.0.0", "vite@^4.4.5":
+"vite@^2.0.0", "vite@^4.0.0", "vite@^4.4.5":
   "integrity" "sha512-6pYf9QJ1mHylfVh39HpuSfMPojPSKVxZvnclX1K1FyZ1PXDOcLBibdq5t1qxJSnL63ca8Wf4zts6mD8u8oc9Fw=="
   "resolved" "https://registry.npmjs.org/vite/-/vite-4.4.7.tgz"
   "version" "4.4.7"

@@ -2,8 +2,8 @@
  * @Author: duxinyues weiyy26445@yunrong.cn
  * @Date: 2023-08-01 00:39:52
  * @LastEditors: duxinyues weiyy26445@yunrong.cn
- * @LastEditTime: 2023-08-10 23:42:28
- * @FilePath: /Electron/vite.config.ts
+ * @LastEditTime: 2023-08-23 01:19:59
+ * @FilePath: /electron-vue/vite.config.ts
  * @Description: 
  * Copyright (c) 2023 by ${duxinyues} email: ${weiyy26445@yunrong.cn}, All Rights Reserved.
  */
@@ -15,7 +15,10 @@ import polyfillExports from "vite-plugin-electron-renderer";
 import { resolve } from "path";
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import ViteComponents, {
+  AntDesignVueResolver
+} from 'vite-plugin-components';
 
 // 查找路径
 const pathResolve = (dir: string): string => {
@@ -37,6 +40,8 @@ export default defineConfig((mode: any) => ({
     }]),
     electronRenderer(),
     polyfillExports(),
+    // 按需引入AntDesignVue
+    ViteComponents({customComponentResolvers: [AntDesignVueResolver()],}),
     // 按需引入elementUI
     AutoImport({
       resolvers: [ElementPlusResolver()],
