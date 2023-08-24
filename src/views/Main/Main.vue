@@ -2,82 +2,84 @@
  * @Author: duxinyues weiyy26445@yunrong.cn
  * @Date: 2023-08-10 23:49:30
  * @LastEditors: duxinyues weiyy26445@yunrong.cn
- * @LastEditTime: 2023-08-24 01:11:37
+ * @LastEditTime: 2023-08-24 13:44:11
  * @FilePath: /electron-vue/src/views/Main/Main.vue
  * @Description: 
  * Copyright (c) 2023 by ${duxinyues} email: ${weiyy26445@yunrong.cn}, All Rights Reserved.
 -->
 
 <template>
-  <a-layout>
-    <a-layout-header class="header">
+  <Layout>
+    <Header class="header">
       <div class="logo" />
-      <a-menu v-model:selectedKeys="selectedKeys1" theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }">
-        <a-menu-item key="1">nav 1</a-menu-item>
-        <a-menu-item key="2">nav 2</a-menu-item>
-        <a-menu-item key="3">nav 3</a-menu-item>
-      </a-menu>
-    </a-layout-header>
-    <a-layout>
-      <a-layout-sider width="200" style="background: #fff">
-        <a-menu v-model:selectedKeys="selectedKeys2" v-model:openKeys="openKeys" mode="inline"
+      <Menu v-model:selectedKeys="selectedKeys1" theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }">
+        <Menu.Item key="1">nav 1</Menu.Item>
+        <Menu.Item key="2">nav 2</Menu.Item>
+        <Menu.Item key="3">nav 3</Menu.Item>
+      </Menu>
+    </Header>
+    <Layout>
+      <Sider width="200" style="background: #fff">
+        <Menu v-model:selectedKeys="selectedKeys2" v-model:openKeys="openKeys" mode="inline"
           :style="{ height: '100%', borderRight: 0 }">
-          <a-sub-menu key="sub1">
+          <Menu.SubMenu key="sub1">
             <template #title>
               <span>
                 <user-outlined />
                 subnav 1
               </span>
             </template>
-            <a-menu-item key="1">option1</a-menu-item>
-            <a-menu-item key="2">option2</a-menu-item>
-            <a-menu-item key="3">option3</a-menu-item>
-            <a-menu-item key="4">option4</a-menu-item>
-          </a-sub-menu>
-          <a-sub-menu key="sub2">
+            <Menu.Item key="1">option1</Menu.Item>
+            <Menu.Item key="2">option2</Menu.Item>
+            <Menu.Item key="3">option3</Menu.Item>
+            <Menu.Item key="4">option4</Menu.Item>
+          </Menu.SubMenu>
+          <Menu.SubMenu key="sub2">
             <template #title>
               <span>
                 <laptop-outlined />
                 subnav 2
               </span>
             </template>
-            <a-menu-item key="5">option5</a-menu-item>
-            <a-menu-item key="6">option6</a-menu-item>
-            <a-menu-item key="7">option7</a-menu-item>
-            <a-menu-item key="8">option8</a-menu-item>
-          </a-sub-menu>
-          <a-sub-menu key="sub3">
+            <Menu.Item key="5">option5</Menu.Item>
+            <Menu.Item key="6">option6</Menu.Item>
+            <Menu.Item key="7">option7</Menu.Item>
+            <Menu.Item key="8">option8</Menu.Item>
+          </Menu.SubMenu>
+          <Menu.SubMenu key="sub3">
             <template #title>
               <span>
                 <notification-outlined />
                 subnav 3
               </span>
             </template>
-            <a-menu-item key="9">option9</a-menu-item>
-            <a-menu-item key="10">option10</a-menu-item>
-            <a-menu-item key="11">option11</a-menu-item>
-            <a-menu-item key="12">option12</a-menu-item>
-          </a-sub-menu>
-        </a-menu>
-      </a-layout-sider>
-      <a-layout style="padding: 0 24px 24px">
-        <a-breadcrumb style="margin: 16px 0">
+            <Menu.Item key="9">option9</Menu.Item>
+            <Menu.Item key="10">option10</Menu.Item>
+            <Menu.Item key="11">option11</Menu.Item>
+            <Menu.Item key="12">option12</Menu.Item>
+          </Menu.SubMenu>
+        </Menu>
+      </Sider>
+      <Layout style="padding: 0 24px 24px">
+        <!-- <a-breadcrumb style="margin: 16px 0">
           <a-breadcrumb-item>Home</a-breadcrumb-item>
           <a-breadcrumb-item>List</a-breadcrumb-item>
           <a-breadcrumb-item>App</a-breadcrumb-item>
-        </a-breadcrumb>
-        <a-layout-content :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }">
+        </a-breadcrumb> -->
+        <Content :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }">
           <RouterView></RouterView>
-        </a-layout-content>
-      </a-layout>
-    </a-layout>
-  </a-layout>
+        </Content>
+      </Layout>
+    </Layout>
+  </Layout>
 </template>
   
 <script lang="ts" setup>
+import { Layout, Menu } from "ant-design-vue"
 import { RouterView } from "vue-router";
 import { ref } from 'vue';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons-vue';
+const { Header, Content, Sider } = Layout;
 const selectedKeys1 = ref<string[]>(['2']);
 const selectedKeys2 = ref<string[]>(['1']);
 const openKeys = ref<string[]>(['sub1']);
