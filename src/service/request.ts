@@ -2,15 +2,15 @@
  * @Author: duxinyues weiyy26445@yunrong.cn
  * @Date: 2023-08-11 00:00:24
  * @LastEditors: duxinyues weiyy26445@yunrong.cn
- * @LastEditTime: 2023-08-11 00:01:35
- * @FilePath: /Electron/src/service/request.ts
+ * @LastEditTime: 2023-08-24 00:50:33
+ * @FilePath: /electron-vue/src/service/request.ts
  * @Description: 
  * Copyright (c) 2023 by ${duxinyues} email: ${weiyy26445@yunrong.cn}, All Rights Reserved.
  */
 import axios from 'axios'
 import config from '../config/index.js'
+import { message } from 'ant-design-vue'
 //错误提示
-import { ElMessage } from 'element-plus'
 const NETWORK_ERROR = '网络请求异常,请稍后重试.....'
 
 
@@ -41,7 +41,7 @@ service.interceptors.response.use((res)=>{
     return data
   } else {
     // 网络请求错误
-    ElMessage.error(msg || NETWORK_ERROR)
+    message.error(msg || NETWORK_ERROR)
      // 对响应错误做点什么
     return Promise.reject(msg || NETWORK_ERROR)
   }

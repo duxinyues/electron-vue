@@ -2,90 +2,103 @@
  * @Author: duxinyues weiyy26445@yunrong.cn
  * @Date: 2023-08-10 23:49:30
  * @LastEditors: duxinyues weiyy26445@yunrong.cn
- * @LastEditTime: 2023-08-13 22:44:55
- * @FilePath: /Electron/src/views/Main/Main.vue
+ * @LastEditTime: 2023-08-24 01:11:37
+ * @FilePath: /electron-vue/src/views/Main/Main.vue
  * @Description: 
  * Copyright (c) 2023 by ${duxinyues} email: ${weiyy26445@yunrong.cn}, All Rights Reserved.
 -->
+
 <template>
-    <el-container class="w100 h100">
-      <el-aside width="150px" class="aside-content">
-        lgklgjsl
-        <!-- <el-header v-if="isShowLogo">
-          <logo-vue />
-        </el-header>
-        <menu-vue v-if="isShowMenu" /> -->
-      </el-aside>
-      <el-container class="main-container" direction="vertical">
-        <!-- <el-header v-if="isShowTopNav">
-          <header-vue />
-        </el-header> -->
-        <!-- <TagsViewVue v-if="isShowTags" /> -->
-        <el-main>
-          <RouterView v-slot="{ Component, route }">
-            <transition
-              :name="<string>route.meta.transition || 'fade'"
-              mode="out-in"
-            >
-              <div class="w100 h100">
-                <template v-if="route.meta.keepAlive">
-                  <keep-alive>
-                    <suspense>
-                      <template #default>
-                        <component
-                          :is="Component"
-                          :key="route.meta.usePathKey ? route.path : undefined"
-                        />
-                      </template>
-                      <template #fallback> <LoadingVue /> </template>
-                    </suspense>
-                  </keep-alive>
-                </template>
-                <template v-else>
-                  <suspense>
-                    <template #default>
-                      <component
-                        :is="Component"
-                        :key="route.meta.usePathKey ? route.path : undefined"
-                      />
-                    </template>
-                    <template #fallback> <LoadingVue /> </template>
-                  </suspense>
-                </template>
-              </div>
-            </transition>
-          </RouterView>
-        </el-main>
-      </el-container>
-    </el-container>
-  </template>
+  <a-layout>
+    <a-layout-header class="header">
+      <div class="logo" />
+      <a-menu v-model:selectedKeys="selectedKeys1" theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }">
+        <a-menu-item key="1">nav 1</a-menu-item>
+        <a-menu-item key="2">nav 2</a-menu-item>
+        <a-menu-item key="3">nav 3</a-menu-item>
+      </a-menu>
+    </a-layout-header>
+    <a-layout>
+      <a-layout-sider width="200" style="background: #fff">
+        <a-menu v-model:selectedKeys="selectedKeys2" v-model:openKeys="openKeys" mode="inline"
+          :style="{ height: '100%', borderRight: 0 }">
+          <a-sub-menu key="sub1">
+            <template #title>
+              <span>
+                <user-outlined />
+                subnav 1
+              </span>
+            </template>
+            <a-menu-item key="1">option1</a-menu-item>
+            <a-menu-item key="2">option2</a-menu-item>
+            <a-menu-item key="3">option3</a-menu-item>
+            <a-menu-item key="4">option4</a-menu-item>
+          </a-sub-menu>
+          <a-sub-menu key="sub2">
+            <template #title>
+              <span>
+                <laptop-outlined />
+                subnav 2
+              </span>
+            </template>
+            <a-menu-item key="5">option5</a-menu-item>
+            <a-menu-item key="6">option6</a-menu-item>
+            <a-menu-item key="7">option7</a-menu-item>
+            <a-menu-item key="8">option8</a-menu-item>
+          </a-sub-menu>
+          <a-sub-menu key="sub3">
+            <template #title>
+              <span>
+                <notification-outlined />
+                subnav 3
+              </span>
+            </template>
+            <a-menu-item key="9">option9</a-menu-item>
+            <a-menu-item key="10">option10</a-menu-item>
+            <a-menu-item key="11">option11</a-menu-item>
+            <a-menu-item key="12">option12</a-menu-item>
+          </a-sub-menu>
+        </a-menu>
+      </a-layout-sider>
+      <a-layout style="padding: 0 24px 24px">
+        <a-breadcrumb style="margin: 16px 0">
+          <a-breadcrumb-item>Home</a-breadcrumb-item>
+          <a-breadcrumb-item>List</a-breadcrumb-item>
+          <a-breadcrumb-item>App</a-breadcrumb-item>
+        </a-breadcrumb>
+        <a-layout-content :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }">
+          <RouterView></RouterView>
+        </a-layout-content>
+      </a-layout>
+    </a-layout>
+  </a-layout>
+</template>
   
-  <script lang="ts" setup>
-//   import { computed } from "vue";
-  import { RouterView } from "vue-router";
-//   import MenuVue from "./Menu.vue";
-//   import HeaderVue from "./Header.vue";
-//   import LogoVue from "./Logo.vue";
-//   import TagsViewVue from "./TagsView.vue";
-//   import LoadingVue from "./Loading.vue";
-//   import { useSettingStore } from "@/stores/counter";
-//   const settingStore = useSettingStore();
-//   const isShowTopNav = computed(() => settingStore.getIsShowTopNav);
-//   const isShowTags = computed(() => settingStore.getIsShowTags);
-//   const isShowLogo = computed(() => settingStore.getIsShowLogo);
-//   const isShowMenu = computed(() => settingStore.getIsShowMenu);
-  </script>
+<script lang="ts" setup>
+import { RouterView } from "vue-router";
+import { ref } from 'vue';
+import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons-vue';
+const selectedKeys1 = ref<string[]>(['2']);
+const selectedKeys2 = ref<string[]>(['1']);
+const openKeys = ref<string[]>(['sub1']);
+</script>
   
-  <style lang="scss" scoped>
-  .aside-content {
-    background-color: #191a23;
-  }
-  .main-container {
-    border-left: solid 1px var(--el-menu-border-color);
-  
-    .el-main {
-      border-top: solid 1px var(--el-menu-border-color);
-    }
-  }
-  </style>
+<style lang="scss" scoped>
+#components-layout-demo-top-side-2 .logo {
+  float: left;
+  width: 120px;
+  height: 31px;
+  margin: 16px 24px 16px 0;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.ant-row-rtl #components-layout-demo-top-side-2 .logo {
+  float: right;
+  margin: 16px 0 16px 24px;
+}
+
+.site-layout-background {
+  background: #fff;
+}
+</style>
   

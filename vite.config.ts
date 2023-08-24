@@ -2,7 +2,7 @@
  * @Author: duxinyues weiyy26445@yunrong.cn
  * @Date: 2023-08-01 00:39:52
  * @LastEditors: duxinyues weiyy26445@yunrong.cn
- * @LastEditTime: 2023-08-23 01:19:59
+ * @LastEditTime: 2023-08-24 01:13:02
  * @FilePath: /electron-vue/vite.config.ts
  * @Description: 
  * Copyright (c) 2023 by ${duxinyues} email: ${weiyy26445@yunrong.cn}, All Rights Reserved.
@@ -19,6 +19,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import ViteComponents, {
   AntDesignVueResolver
 } from 'vite-plugin-components';
+import vitePluginImp from "vite-plugin-imp";
 
 // 查找路径
 const pathResolve = (dir: string): string => {
@@ -41,13 +42,31 @@ export default defineConfig((mode: any) => ({
     electronRenderer(),
     polyfillExports(),
     // 按需引入AntDesignVue
+    AutoImport({
+      imports: ['vue', 'vue-router'],
+      dts: "src/auto-import.d.ts",
+      //ant-design-vue
+      resolvers: [AntDesignVueResolver()]
+    }),
+    // Components({
+    //   //ant-design-vue   importStyle = false 样式就没了
+    //     resolvers: [AntDesignVueResolver({importStyle: true, resolveIcons: true})],
+    // }),
+    vitePluginImp({
+      libList: [
+        {
+          libName: "ant-design-vue",
+          style: (name) => `ant-design-vue/es/${name}/style`,
+        },
+      ],
+    }),
     ViteComponents({customComponentResolvers: [AntDesignVueResolver()],}),
     // 按需引入elementUI
-    AutoImport({
-      resolvers: [ElementPlusResolver()],
-    }), Components({
-      resolvers: [ElementPlusResolver()],
-    })
+    // AutoImport({
+    //   resolvers: [ElementPlusResolver()],
+    // }), Components({
+    //   resolvers: [ElementPlusResolver()],
+    // })
   ],
   resolve: {
     alias,
