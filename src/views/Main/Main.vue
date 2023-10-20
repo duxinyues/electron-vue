@@ -2,20 +2,20 @@
  * @Author: duxinyues weiyy26445@yunrong.cn
  * @Date: 2023-08-10 23:49:30
  * @LastEditors: duxinyues weiyy26445@yunrong.cn
- * @LastEditTime: 2023-08-24 13:44:11
+ * @LastEditTime: 2023-08-29 00:41:04
  * @FilePath: /electron-vue/src/views/Main/Main.vue
  * @Description: 
  * Copyright (c) 2023 by ${duxinyues} email: ${weiyy26445@yunrong.cn}, All Rights Reserved.
 -->
 
 <template>
-  <Layout>
+  <Layout class="layout-content" >
     <Header class="header">
       <div class="logo" />
       <Menu v-model:selectedKeys="selectedKeys1" theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }">
-        <Menu.Item key="1">nav 1</Menu.Item>
+        <!-- <Menu.Item key="1">nav 1</Menu.Item>
         <Menu.Item key="2">nav 2</Menu.Item>
-        <Menu.Item key="3">nav 3</Menu.Item>
+        <Menu.Item key="3">nav 3</Menu.Item> -->
       </Menu>
     </Header>
     <Layout>
@@ -86,6 +86,9 @@ const openKeys = ref<string[]>(['sub1']);
 </script>
   
 <style lang="scss" scoped>
+.layout-content{
+  height: 100vh;
+}
 #components-layout-demo-top-side-2 .logo {
   float: left;
   width: 120px;
