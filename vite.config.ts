@@ -4,7 +4,7 @@
  * @LastEditors: duxinyues weiyy26445@yunrong.cn
  * @LastEditTime: 2023-08-24 01:13:02
  * @FilePath: /electron-vue/vite.config.ts
- * @Description: 
+ * @Description:
  * Copyright (c) 2023 by ${duxinyues} email: ${weiyy26445@yunrong.cn}, All Rights Reserved.
  */
 import { defineConfig } from 'vite';
@@ -42,25 +42,20 @@ export default defineConfig((mode: any) => ({
     electronRenderer(),
     polyfillExports(),
     // 按需引入AntDesignVue
-    AutoImport({
-      imports: ['vue', 'vue-router'],
-      dts: "src/auto-import.d.ts",
-      //ant-design-vue
-      resolvers: [AntDesignVueResolver()]
-    }),
-    // Components({
-    //   //ant-design-vue   importStyle = false 样式就没了
-    //     resolvers: [AntDesignVueResolver({importStyle: true, resolveIcons: true})],
+    // AutoImport({
+    //   imports: ['vue', 'vue-router'],
+    //   dts: "src/auto-import.d.ts",
+    //   //ant-design-vue
+    //   resolvers: [AntDesignVueResolver()]
     // }),
-    vitePluginImp({
-      libList: [
-        {
-          libName: "ant-design-vue",
-          style: (name) => `ant-design-vue/es/${name}/style`,
-        },
+    Components({
+      resolvers: [
+        AntDesignVueResolver({
+          importStyle: false, // css in js
+        }),
       ],
     }),
-    ViteComponents({customComponentResolvers: [AntDesignVueResolver()],}),
+    // ViteComponents({customComponentResolvers: [AntDesignVueResolver()],}),
     // 按需引入elementUI
     // AutoImport({
     //   resolvers: [ElementPlusResolver()],

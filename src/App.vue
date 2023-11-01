@@ -4,7 +4,7 @@
  * @LastEditors: duxinyues weiyy26445@yunrong.cn
  * @LastEditTime: 2023-08-17 00:36:41
  * @FilePath: /Electron/src/App.vue
- * @Description: 
+ * @Description:
  * Copyright (c) 2023 by ${duxinyues} email: ${weiyy26445@yunrong.cn}, All Rights Reserved.
 -->
 <script setup lang="ts">

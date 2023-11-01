@@ -4,15 +4,15 @@
  * @LastEditors: duxinyues weiyy26445@yunrong.cn
  * @LastEditTime: 2023-08-29 00:56:35
  * @FilePath: /electron-vue/src/router/index.js
- * @Description: 
+ * @Description:
  * Copyright (c) 2023 by ${duxinyues} email: ${weiyy26445@yunrong.cn}, All Rights Reserved.
  */
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createMemoryHistory } from "vue-router";
 
 const routes = [{
     path: '/',
     name: 'main',
-    component: () => import("../components/HelloWorld.vue"),
+    component: () => import("../views/ElectronCalendar.vue"),
     // redirect: '/home',
     // children:[
     //     {
@@ -29,7 +29,7 @@ const routes = [{
 }];
 
 const router = createRouter({
-    history: createWebHistory(import.meta.env.BASE_URL),
+    history: createMemoryHistory(import.meta.env.BASE_URL),
     routes
 })
 

@@ -13,7 +13,7 @@
   "build": {
     "appId": "ink.bennent_g.demo",
     "directories": {
-      "output": "output"
+      "output": "release"
     },
     "nsis": {
       "oneClick": false,
@@ -32,6 +32,7 @@
     "ant-design-vue": "^4.0.1",
     "axios": "^1.4.0",
     "concurrently": "^8.2.0",
+    "dayjs": "^1.11.10",
     "scss": "^0.2.4",
     "unplugin-auto-import": "^0.16.6",
     "unplugin-vue-components": "^0.25.1",
