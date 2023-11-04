@@ -1,5 +1,14 @@
+<!--
+ * @Author: wei26445 weiyy26445@yunrong.cn
+ * @Date: 2023-11-02 00:02:40
+ * @LastEditors: wei26445 weiyy26445@yunrong.cn
+ * @LastEditTime: 2023-11-02 20:02:26
+ * @FilePath: /electron-vue/src/views/ElectronCalendar.vue
+ * @Description:
+ * Copyright (c) 2023 by ${wei26445} email: ${weiyy26445@yunrong.cn}, All Rights Reserved.
+-->
 <template>
-  <a-alert :message="`You selected date: ${selectedValue && selectedValue.format('YYYY-MM-DD')}`" />
+  <a-alert :message="`今日: ${selectedValue && selectedValue.format('YYYY-MM-DD')}`" />
   <a-calendar  v-model:value="tagetDate" @select="onSelect" @panelChange="onPanelChange" >
     <template #dateCellRender="{ current }">
       <ul class="events">
@@ -10,6 +19,7 @@
     </template>
   </a-calendar>
 </template>
+
 <script lang="ts" setup>
 import { ref } from 'vue';
 import dayjs, { Dayjs } from 'dayjs';
@@ -27,7 +37,7 @@ const getListData = (value: Dayjs) => {
   switch (value.date()) {
     case 2:
       listData = [
-        { type: 'warning', content: 'This is warning event.' },
+        { type: 'warning', content: '' },
         { type: 'success', content: 'This is usual event.' },
       ];
       break;
