@@ -1,18 +1,15 @@
-<!--
- * @Author: duxinyues weiyy26445@yunrong.cn
- * @Date: 2023-08-03 08:59:21
- * @LastEditors: duxinyues weiyy26445@yunrong.cn
- * @LastEditTime: 2023-08-17 00:36:41
- * @FilePath: /Electron/src/App.vue
- * @Description:
- * Copyright (c) 2023 by ${duxinyues} email: ${weiyy26445@yunrong.cn}, All Rights Reserved.
--->
 <script setup lang="ts">
+import zhCN from 'ant-design-vue/es/locale/zh_CN';
+import dayjs from 'dayjs';
+import 'dayjs/locale/zh-cn';
+dayjs.locale('zh-cn');
 </script>
 <template>
-  <keep-alive>
-    <router-view></router-view>
-  </keep-alive>
+  <a-config-provider :locale="zhCN">
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
+  </a-config-provider>
 </template>
 <style scoped>
 .logo {
