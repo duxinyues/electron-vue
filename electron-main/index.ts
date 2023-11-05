@@ -7,8 +7,11 @@
  * @Description: electron 主进程
  * Copyright (c) 2023 by ${weiyy26445} email: ${weiyy26445@yunrong.cn}, All Rights Reserved.
  */
-import { app, BrowserWindow } from "electron"
+import { app, BrowserWindow, ipcMain } from "electron"
 import path, { join } from "path";
+
+let onlineStatusWindow;
+let mainWindow: BrowserWindow;
 
 process.env.DIST_ELECTRON = join(__dirname, '..')
 process.env.DIST = join(process.env.DIST_ELECTRON, '../dist')
@@ -18,34 +21,44 @@ process.env.PUBLIC = app.isPackaged
 
 
 const createWindow = () => {
-	const win = new BrowserWindow({
-		title: '菜单管理工具',
+	mainWindow = new BrowserWindow({
+		title: 'electron-vue',
 		icon: path.join(process.env.PUBLIC, 'vite.svg'),
 		webPreferences: {
 			preload: path.join(__dirname, './preload.js'),
 			nodeIntegration: true, // 渲染进程使用Node API
 			contextIsolation: true, // 是否隔离上下文
 		}
-	})
+	});
+
 	// 加载vue url视本地环境而定，如http://localhost:5173
 	// win.loadURL('http://localhost:3000')
 	if (process.env.NODE_ENV === 'development') {
-		win.loadURL('http://localhost:5173')
-		win.webContents.openDevTools()
+		mainWindow.loadURL('http://localhost:5173')
+		mainWindow.webContents.openDevTools()
 	} else {
-		win.loadFile(path.join(__dirname, './index.html'))
+		mainWindow.loadFile(path.join(__dirname, './index.html'))
 	}
-	// win.maximize()
+	// mainWindow.maximize()
 }
 
+// 监听应用程序
 app.whenReady().then(() => {
 	createWindow(); // 创建窗口
-	app.on('activate', () => {
-		if (BrowserWindow.getAllWindows().length === 0) createWindow()
+	ipcMain.on('selectDate',(e,date)=>{
+		console.log("渲染进程发送的日期",date)
+		mainWindow.webContents.send("returnInfo", date)
 	})
+
+	app.on('activate', () => {
+		if (BrowserWindow.getAllWindows().length === 0) createWindow();
+		onlineStatusWindow = new BrowserWindow({ width: 0, height: 0, show: false });
+		// onlineStatusWindow.loadURL('file://' + __dirname + '/online-status.html');
+
+	});
 })
 
-// 关闭窗口
+// 关闭程序
 app.on('window-all-closed', () => {
 	if (process.platform !== 'darwin') app.quit()
 })

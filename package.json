@@ -16,7 +16,7 @@
       "output": "release"
     },
     "nsis": {
-      "oneClick": false,
+      "oneClick": true,
       "allowElevation": true,
       "allowToChangeInstallationDirectory": true,
       "installerIcon": "./assets/vue.svg",
