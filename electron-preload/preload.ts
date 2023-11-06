@@ -2,6 +2,7 @@
  * 预加载脚本
  */
 import {contextBridge, ipcRenderer, IpcRendererEvent} from 'electron';
+import {eventer} from "../common/events.ts";
 
 contextBridge.exposeInMainWorld('electron', {
     ipcRenderer: {
