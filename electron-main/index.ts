@@ -44,8 +44,9 @@ const createWindow = () => {
 
 // 监听应用程序
 app.whenReady().then(() => {
+	console.log('whenReady事件')
 	createWindow(); // 创建窗口
-	ipcMain.on('selectDate',(e,date)=>{
+	ipcMain.handle('selectDate',(e,date)=>{
 		console.log("渲染进程发送的日期",date)
 		mainWindow.webContents.send("returnInfo", date)
 	})
@@ -57,7 +58,9 @@ app.whenReady().then(() => {
 
 	});
 })
-
+app.on('will-finish-launching',()=>{
+	console.log("这是什么事件")
+})
 // 关闭程序
 app.on('window-all-closed', () => {
 	if (process.platform !== 'darwin') app.quit()
