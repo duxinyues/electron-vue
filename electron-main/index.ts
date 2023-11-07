@@ -1,12 +1,3 @@
-/*
- * @Author: weiyy26445 weiyy26445@yunrong.cn
- * @Date: 2023-08-01 22:13:13
- * @LastEditors: duxinyues weiyy26445@yunrong.cn
- * @LastEditTime: 2023-08-13 21:54:33
- * @FilePath: /Electron/electron-main/index.ts
- * @Description: electron 主进程
- * Copyright (c) 2023 by ${weiyy26445} email: ${weiyy26445@yunrong.cn}, All Rights Reserved.
- */
 import { app, BrowserWindow, ipcMain } from "electron"
 import path, { join } from "path";
 
