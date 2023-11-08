@@ -34,8 +34,17 @@ const createWindow = () => {
 }
 
 // 监听应用程序
-app.whenReady().then(() => {
-    console.log('whenReady事件')
+// app.whenReady().then(() => {
+//     console.log('whenReady事件')
+//     createWindow(); // 创建窗口
+//
+// })
+// 应用程序完成基础的启动的时候被触发
+app.on('will-finish-launching', () => {
+    console.log("应用程序完成基础的启动的时候被触发")
+})
+app.on("ready",()=>{
+    console.log("ready");
     createWindow(); // 创建窗口
     ipcMain.handle('selectDate', (e, date) => {
         console.log("渲染进程发送的日期", date)
@@ -49,19 +58,15 @@ app.whenReady().then(() => {
 //
     });
 })
-// 应用程序完成基础的启动的时候被触发
-app.on('will-finish-launching', () => {
-    console.log("应用程序完成基础的启动的时候被触发")
-})
+
 
 // 当所有的窗口都被关闭时触发
 app.on('window-all-closed', () => {
     console.log("当所有的窗口都被关闭时触发");
-    console.log("===", process.platform)
     if (process.platform !== 'darwin') app.quit()
 })
 
-app.on('before-quit', () => {
+app.on('before-quit', (event) => {
     console.log("before-quit")
 })
 
@@ -85,7 +90,7 @@ app.on("activate", () => {
     console.log("activate")
 })
 
-app.on('login', (event, webContents, details, authInfo, callback) => {
-    event.preventDefault()
-    callback('username', 'secret')
-})
+// app.on('login', (event, webContents, details, authInfo, callback) => {
+//     event.preventDefault()
+//     callback('username', 'secret')
+// })
