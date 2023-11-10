@@ -1,7 +1,6 @@
-import {app, BrowserWindow, ipcMain} from "electron"
+import {app, BrowserWindow, ipcMain,WebContents,Certificate} from "electron"
 import path, {join} from "path";
 
-let onlineStatusWindow;
 let mainWindow: BrowserWindow;
 
 process.env.DIST_ELECTRON = join(__dirname, '..')
@@ -43,17 +42,18 @@ const createWindow = () => {
 app.on('will-finish-launching', () => {
     console.log("应用程序完成基础的启动的时候被触发")
 })
-app.on("ready",()=>{
+app.on("ready", () => {
     console.log("ready");
     createWindow(); // 创建窗口
     ipcMain.handle('selectDate', (e, date) => {
         console.log("渲染进程发送的日期", date)
         mainWindow.webContents.send("returnInfo", date)
     })
+console.log('======',app.getLocaleCountryCode(),app.getSystemLocale(),app.getPreferredSystemLanguages(),app.getApplicationNameForProtocol('https://github.com/'))
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow();
-        onlineStatusWindow = new BrowserWindow({width: 0, height: 0, show: false});
+       let onlineStatusWindow = new BrowserWindow({width: 0, height: 0, show: false});
         // onlineStatusWindow.loadURL('file://' + __dirname + '/online-status.html');
 //
     });
@@ -89,8 +89,43 @@ app.on("open-url", () => {
 app.on("activate", () => {
     console.log("activate")
 })
+// 身份核验的时候触发
+app.on('login', (event, webContents, details, authInfo, callback) => {
+    event.preventDefault()
+    callback('username', 'secret')
+})
+// browserWindow 获得焦点的时候触发
+app.on('browser-window-focus', () => {
+    console.log("browser-window-focus")
+})
+// BrowserWindow创建的时候触发
+app.on("browser-window-created", () => {
+    console.log('browser-window-created')
+})
 
-// app.on('login', (event, webContents, details, authInfo, callback) => {
-//     event.preventDefault()
-//     callback('username', 'secret')
-// })
+app.on('web-contents-created',()=>{
+    console.log("web-contents-created")
+})
+
+// 证书相关的事件
+app.on('certificate-error', (event, webContents:WebContents, url, error, certificate:Certificate, callback) => {
+    if (url === 'https://github.com') {
+        // Verification logic.
+        event.preventDefault()
+        callback(true)
+    } else {
+        callback(false)
+    }
+})
+app.on('select-client-certificate', (event, webContents, url, list, callback) => {
+    event.preventDefault()
+    callback(list[0])
+})
+
+app.on('render-process-gone',()=>{
+    console.log("渲染进程意外消失触发")
+})
+
+app.on('child-process-gone',()=>{
+    console.log('子进程消失触发')
+})
