@@ -12,7 +12,7 @@ import { createRouter, createMemoryHistory } from "vue-router";
 const routes = [{
     path: '/',
     name: 'main',
-    component: () => import("../views/ElectronCalendar.vue"),
+    component: () => import("../views/Home/Home.vue"),
     // redirect: '/home',
     // children:[
     //     {

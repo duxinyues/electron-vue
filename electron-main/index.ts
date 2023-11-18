@@ -1,5 +1,5 @@
-import {app, BrowserWindow, ipcMain,WebContents,Certificate} from "electron"
-import path, {join} from "path";
+import { app, BrowserWindow, ipcMain, WebContents, Certificate,dialog } from "electron"
+import path, { join } from "path";
 
 let mainWindow: BrowserWindow;
 
@@ -49,13 +49,16 @@ app.on("ready", () => {
         console.log("渲染进程发送的日期", date)
         mainWindow.webContents.send("returnInfo", date)
     })
-console.log('======',app.getLocaleCountryCode(),app.getSystemLocale(),app.getPreferredSystemLanguages(),app.getApplicationNameForProtocol('https://github.com/'))
+    ipcMain.handle('openFile',(e,data)=>{
+        console.log("打开文件")
+    })
+    console.log('======', app.getLocaleCountryCode(), app.getSystemLocale(), app.getPreferredSystemLanguages(), app.getApplicationNameForProtocol('https://github.com/'))
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow();
-       let onlineStatusWindow = new BrowserWindow({width: 0, height: 0, show: false});
+        let onlineStatusWindow = new BrowserWindow({ width: 0, height: 0, show: false });
         // onlineStatusWindow.loadURL('file://' + __dirname + '/online-status.html');
-//
+        //
     });
 })
 
@@ -103,12 +106,12 @@ app.on("browser-window-created", () => {
     console.log('browser-window-created')
 })
 
-app.on('web-contents-created',()=>{
+app.on('web-contents-created', () => {
     console.log("web-contents-created")
 })
 
 // 证书相关的事件
-app.on('certificate-error', (event, webContents:WebContents, url, error, certificate:Certificate, callback) => {
+app.on('certificate-error', (event, webContents: WebContents, url, error, certificate: Certificate, callback) => {
     if (url === 'https://github.com') {
         // Verification logic.
         event.preventDefault()
@@ -122,10 +125,10 @@ app.on('select-client-certificate', (event, webContents, url, list, callback) =>
     callback(list[0])
 })
 
-app.on('render-process-gone',()=>{
+app.on('render-process-gone', () => {
     console.log("渲染进程意外消失触发")
 })
 
-app.on('child-process-gone',()=>{
+app.on('child-process-gone', () => {
     console.log('子进程消失触发')
 })
