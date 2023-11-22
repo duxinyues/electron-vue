@@ -1,5 +1,6 @@
-import { app, BrowserWindow, ipcMain, WebContents, Certificate,dialog } from "electron"
-import path, { join } from "path";
+import {app, BrowserWindow, ipcMain, WebContents, Certificate, dialog, IpcRendererEvent} from "electron"
+import path, {join} from "path";
+import {readFile} from "./readFile.ts"
 
 let mainWindow: BrowserWindow;
 
@@ -42,21 +43,41 @@ const createWindow = () => {
 app.on('will-finish-launching', () => {
     console.log("应用程序完成基础的启动的时候被触发")
 })
-app.on("ready", () => {
+app.on("ready", (event) => {
     console.log("ready");
     createWindow(); // 创建窗口
-    ipcMain.handle('selectDate', (e, date) => {
+    ipcMain.handle('selectDate', (envet: any, date: any) => {
         console.log("渲染进程发送的日期", date)
         mainWindow.webContents.send("returnInfo", date)
     })
-    ipcMain.handle('openFile',(e,data)=>{
-        console.log("打开文件")
+    ipcMain.handle('openFile', async (event: IpcRendererEvent) => {
+        const webContents = event.sender;
+        BrowserWindow.fromWebContents(webContents);
+        let file = await dialog.showOpenDialog({
+            title: "选择文件",
+            message: "选择文件",
+            buttonLabel: "按此打开文件",
+        });
+        if (file.filePaths && file.filePaths.length > 0) {
+            mainWindow.webContents.send("filePath", file.filePaths[0]);
+            readFile(file.filePaths[0], (data) => {
+                mainWindow.webContents.send("fileContent", data);
+            })
+
+            console.log("file.filePaths[0]", file.filePaths[0])
+        }
+        mainWindow.webContents.send("versionInfo", app.getVersion());
+    });
+    ipcMain.handle("savaFile", async () => {
+        await dialog.showSaveDialog({
+            title: "保存文件"
+        })
     })
-    console.log('======', app.getLocaleCountryCode(), app.getSystemLocale(), app.getPreferredSystemLanguages(), app.getApplicationNameForProtocol('https://github.com/'))
+    //  主进程向渲染进程发送版本信息
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow();
-        let onlineStatusWindow = new BrowserWindow({ width: 0, height: 0, show: false });
+        new BrowserWindow({width: 0, height: 0, show: false});
         // onlineStatusWindow.loadURL('file://' + __dirname + '/online-status.html');
         //
     });
@@ -69,7 +90,7 @@ app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit()
 })
 
-app.on('before-quit', (event) => {
+app.on('before-quit', () => {
     console.log("before-quit")
 })
 

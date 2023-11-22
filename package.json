@@ -1,7 +1,7 @@
 {
   "name": "duxinyues",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "dist-electron/index.js",
   "scripts": {
     "dev": "vite",
@@ -29,6 +29,8 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
+    "@wangeditor/editor": "^5.1.23",
+    "@wangeditor/editor-for-vue": "^5.1.12",
     "ant-design-vue": "^4.0.1",
     "axios": "^1.4.0",
     "concurrently": "^8.2.0",
