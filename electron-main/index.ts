@@ -13,7 +13,7 @@ process.env.PUBLIC = app.isPackaged
 
 const createWindow = () => {
     mainWindow = new BrowserWindow({
-        title: 'electron-vue',
+        title: '编辑器',
         icon: path.join(process.env.PUBLIC, 'vite.svg'),
         webPreferences: {
             preload: path.join(__dirname, './preload.js'),

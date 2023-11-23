@@ -1,12 +1,3 @@
-<!--
- * @Author: weiyy26445 weiyy26445@yunrong.cn
- * @Date: 2023-11-21 23:51:09
- * @LastEditors: weiyy26445 weiyy26445@yunrong.cn
- * @LastEditTime: 2023-11-22 00:15:42
- * @FilePath: /electron-vue/src/views/Edit/EditFile.vue
- * @Description: 编辑文件
- * Copyright (c) 2023 by ${weiyy26445} email: ${weiyy26445@yunrong.cn}, All Rights Reserved.
--->
 <template>
   <a-button type="primary" @click="onSelectFile">选择文件</a-button>
   <div class="edit-container">
@@ -53,7 +44,7 @@ export default {
     const editorRef = shallowRef();
 
     // 内容 HTML
-    const valueHtml = ref('<p>hello</p>');
+    const valueHtml = ref('<p></p>');
 
     // 模拟 ajax 异步获取内容
     onMounted(() => {
@@ -110,21 +101,9 @@ export default {
     const insertText = () => {
       const editor = editorRef.value;
       if (editor == null) return;
-
       editor.insertText('hello world');
     };
 
-    const printHtml = () => {
-      const editor = editorRef.value;
-      if (editor == null) return;
-      console.log(editor.getHtml());
-    };
-
-    const disable = () => {
-      const editor = editorRef.value;
-      if (editor == null) return;
-      editor.disable()
-    };
     console.log(window)
     const onSelectFile = () => {
       console.log("选择文件")
@@ -146,8 +125,6 @@ export default {
       customAlert,
       customPaste,
       insertText,
-      printHtml,
-      disable,
       onSelectFile,
     };
   },
